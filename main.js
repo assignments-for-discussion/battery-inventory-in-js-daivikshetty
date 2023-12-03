@@ -28,14 +28,39 @@ function countBatteriesByHealth(presentCapacities) {
 function testBucketingByHealth() {
   console.log('Counting batteries by SoH...');
 
-  const presentCapacities = [113, 116, 80, 95, 92, 70];
-  counts = countBatteriesByHealth(presentCapacities);
+  //battery set 1
 
-  assert(counts["healthy"] == 2);
-  assert(counts["exchange"] == 3);
-  assert(counts["failed"] == 1);
+  console.log('Test case 1:');
+  const batterySet1 = [113, 116, 80, 95, 92, 70];
+  counts = countBatteriesByHealth(batterySet1);    //call function for batterySet1
 
-  console.log("Done counting :)");
+  try{      //check each category
+      assert(counts["healthy"] == 2);
+      assert(counts["exchange"] == 3);
+      assert(counts["failed"] == 1);
+      console.log('Passed');  //print if all 3 are correct
+  }
+  catch(e){
+      console.log('Failed');  //print if any one is wrong
+  }
+
+  //battery set 2 - boundary conditions
+
+  console.log('Test case 2:');
+  const batterySet2 = [113, 96, 74, 75, 73, 72];
+  counts = countBatteriesByHealth(batterySet2);  //call function for batterySet1
+  
+  try{   //check each category
+      assert(counts["healthy"] == 1);
+      assert(counts["exchange"] == 2);
+      assert(counts["failed"] == 3);
+      console.log('Passed');  //print if all 3 are correct
+  }
+  catch(e){
+      console.log('Failed');  //print if any one is wrong
+  }
+
+  console.log("Done counting :)"); //end of test cases
 }
 
 testBucketingByHealth();
